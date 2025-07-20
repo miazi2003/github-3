@@ -1,0 +1,7 @@
+/* Apply this class to any section or div you want to style */
+.gradient-bg {
+  background: linear-gradient(to right, #006400, #00c9a7, #2196f3);
+  color: white; /* optional: makes text readable */
+  padding: 2rem; /* optional: spacing */
+
+}
