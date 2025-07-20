@@ -107,6 +107,13 @@ const Navbar = () => {
                 </NavLink>
               </li>
             )}
+            {user && (
+              <li>
+                <NavLink to="/allPackages" className={navLinkClass}>
+                  All packages
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink to="/about" className={navLinkClass}>
                 About Us

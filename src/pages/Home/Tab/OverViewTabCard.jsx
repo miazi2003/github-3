@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const OverViewTabCard = ({data}) => {
   return (
@@ -19,9 +20,9 @@ const OverViewTabCard = ({data}) => {
             <span className="font-semibold text-lime-300">${data.price}</span>
           </p>
           <div className="pt-3">
-            <button className="w-full bg-lime-400 text-[#3B4E42] font-semibold py-2 rounded-md hover:bg-lime-300 transition-colors duration-300">
-              Buy Now
-            </button>
+           <Link to={`/package/${data._id}`}> <button className="w-full bg-lime-400 text-[#3B4E42] font-semibold py-2 rounded-md hover:bg-lime-300 transition-colors duration-300">
+              View Package
+            </button></Link>
           </div>
         </div>
       </div>
