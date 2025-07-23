@@ -153,11 +153,13 @@ const Navbar = () => {
                   <span>{user?.displayName || "User"}</span>
                   <span className="text-sm text-gray-500">{user?.email}</span>
                 </li>
-                <li>
-                  <NavLink to="/dashboard" className={navLinkClass}>
+              {
+                user &&   <li>
+                  <NavLink to="/guideForm" className={navLinkClass}>
                     Dashboard
                   </NavLink>
                 </li>
+              }
                 <li>
                   <NavLink to="/offers" className={navLinkClass}>
                     Offer Announcements

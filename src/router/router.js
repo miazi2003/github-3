@@ -11,6 +11,10 @@ import AddStory from "../pages/AddStory/AddStory";
 import MyBookings from "../pages/Booking manage/MyBookings";
 import ManageStories from "../pages/Manage story/ManageStories";
 import UpdateStory from "../pages/Manage story/updateStory/UpdateStory";
+import ViewStory from "../pages/Community/ViewStory";
+import StoryCommunity from "../pages/Community/StoryCommunity";
+import TourGuideProfile from "../pages/TourGuideProfile.jsx/TourGuideProfile";
+import TourGuideForm from "../pages/TourGuideForm/TourGuideForm";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +32,10 @@ export const router = createBrowserRouter([
         {path : "/manageBookings" , Component:MyBookings},
         {path : "/manageStories" , Component:ManageStories},
         {path : "/updateStory/:id" , Component:UpdateStory},
+        {path : "/community" , Component:StoryCommunity},
+        {path : "/viewStory/:id" , Component:ViewStory},
+        {path : "/guideProfile/:email" , Component:TourGuideProfile},
+        {path : "/guideForm" , Component:TourGuideForm},
     ],
   },
 ]);

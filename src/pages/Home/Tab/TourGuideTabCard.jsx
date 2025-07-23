@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const TourGuideTabCard = ({ guide }) => {
   return (
@@ -24,9 +25,10 @@ const TourGuideTabCard = ({ guide }) => {
     </div>
 
     <div className="pt-4 mt-4">
+      <Link to={`/guideProfile/${guide.email}`} >
       <button className="w-full bg-lime-400 text-[#3B4E42] font-semibold py-2 px-4 rounded-md hover:bg-lime-300 transition-colors duration-300">
       Guide Profile
-      </button>
+      </button></Link>
     </div>
   </div>
 </div>

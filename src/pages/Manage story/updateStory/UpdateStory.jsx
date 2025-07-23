@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
-import useAxiosSecure from "../../hook/useAxiosSecure";
-import useAuth from "../../hook/useAuth";
+
+import useAxiosSecure from "../../../hook/useAxiosSecure";
+import useAuth from "../../../hook/useAuth";
 
 const UpdateStory = () => {
   const { id } = useParams();
@@ -98,7 +99,7 @@ const UpdateStory = () => {
 
         {/* Existing Images */}
         <div>
-          <h2 className="text-lg font-semibold mb-2 text-lime-400">📷 Existing Images</h2>
+          <h2 className="text-lg font-semibold mb-2 text-lime-400">📷 Your Images</h2>
           <div className="grid grid-cols-2 gap-3">
             {storyData.imageList?.map((img, idx) => (
               <div key={idx} className="relative">
