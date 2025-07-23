@@ -240,7 +240,7 @@ const PackageDetails = () => {
           Your booking request has been sent. You can manage it from My Bookings.
         </p>
         <button
-          onClick={() => navigate("/my-bookings")}
+          onClick={() => navigate("/manageBookings")}
           className="bg-lime-500 px-4 py-2 rounded hover:bg-lime-400"
         >
           Go to My Bookings

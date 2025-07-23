@@ -27,7 +27,7 @@ const AllPackages = () => {
       <h1 className="text-4xl font-bold mb-8 text-[#d1d5dc] text-center">
         All Packages
       </h1>
-
+      
       <p className="text-sm text-gray-100 max-w-3xl mx-auto mb-6 text-center">
         Discover the beauty of Bangladesh through our handpicked tour packages.
         From scenic landscapes to cultural heritage, explore a variety of

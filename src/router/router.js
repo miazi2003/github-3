@@ -7,6 +7,10 @@ import About from "../pages/About us/AboutUs";
 import TouristOverview from "../pages/Home/websiteOverview section/TouristOverview";
 import PackageDetails from "../pages/Home/Tab/PackageDetails";
 import AllPackages from "../pages/Home/AllPackages/AllPackages";
+import AddStory from "../pages/AddStory/AddStory";
+import MyBookings from "../pages/Booking manage/MyBookings";
+import ManageStories from "../pages/Manage story/ManageStories";
+import UpdateStory from "../pages/Manage story/updateStory/UpdateStory";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +24,10 @@ export const router = createBrowserRouter([
         {path : "/overview" , Component: TouristOverview},
         {path : "/package/:id" , Component: PackageDetails},
         {path : "/allPackages" , Component: AllPackages},
+        {path : "/addStory" , Component: AddStory},
+        {path : "/manageBookings" , Component:MyBookings},
+        {path : "/manageStories" , Component:ManageStories},
+        {path : "/updateStory/:id" , Component:UpdateStory},
     ],
   },
 ]);

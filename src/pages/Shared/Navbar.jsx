@@ -50,7 +50,7 @@ const Navbar = () => {
               )}
               {user && (
                 <li>
-                  <NavLink to="/trips" className={navLinkClass}>
+                  <NavLink to="/allPackages" className={navLinkClass}>
                     Trips
                   </NavLink>
                 </li>
@@ -102,15 +102,15 @@ const Navbar = () => {
             )}
             {user && (
               <li>
-                <NavLink to="/trips" className={navLinkClass}>
-                  Trips
+                <NavLink to="/allPackages" className={navLinkClass}>
+                 Trips
                 </NavLink>
               </li>
             )}
             {user && (
               <li>
-                <NavLink to="/allPackages" className={navLinkClass}>
-                  All packages
+                <NavLink to="/addStory" className={navLinkClass}>
+                  Add Story
                 </NavLink>
               </li>
             )}
