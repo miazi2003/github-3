@@ -17,24 +17,24 @@ const DashboardLayout = () => {
       if (role === "admin") {
         setLinks([
           { name: "Manage Profile", path: "/dashboard/profile" },
-          { name: "My Assigned Tours", path: "/dashboard/assigned-tours" },
-          { name: "Add Stories", path: "/dashboard/stories/add" },
-          { name: "Manage Stories", path: "/dashboard/stories/manage" },
+          { name: "Assigned Tours", path: "/dashboard/allTour" },
+          { name: "Add Stories", path: "/dashboard/addStory" },
+          { name: "Manage Stories", path: "/dashboard/manageStories" },
         ]);
       } else if (role === "guide") {
         setLinks([
           { name: "Manage Profile", path: "/dashboard/profile" },
           { name: "My Assigned Tours", path: "/dashboard/assigned-tours" },
-          { name: "Add Stories", path: "/dashboard/stories/add" },
-          { name: "Manage Stories", path: "/dashboard/stories/manage" },
+          { name: "Add Stories", path: "/dashboard/addStory" },
+          { name: "Manage Stories", path: "/dashboard/manageStories" },
         ]);
       } else {
         // tourist
         setLinks([
           { name: "Manage Profile", path: "/dashboard/profile" },
           { name: "My Bookings", path: "/dashboard/bookings" },
-          { name: "Add Stories", path: "/dashboard/stories/add" },
-          { name: "Manage Stories", path: "/dashboard/stories/manage" },
+          { name: "Add Stories", path: "/dashboard/addStory" },
+          { name: "Manage Stories", path: "/dashboard/manageStories" },
           { name: "Join as Tour Guide", path: "/dashboard/join-guide" },
         ]);
       }

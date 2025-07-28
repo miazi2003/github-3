@@ -18,6 +18,7 @@ import TourGuideForm from "../pages/TourGuideForm/TourGuideForm";
 import DashboardLayout from "../Layouts/DashBoardLayout";
 import ProtectedRoute from "./protected/ProtectedRoute";
 import ManageProfile from "../pages/Manage profile/ManageProfile";
+import AllAssignedTours from "../pages/AllAssigned/AllAssignedTours";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ export const router = createBrowserRouter([
       { path: "addStory", Component: AddStory },
       { path: "manageBookings", Component: MyBookings },
       { path: "profile", Component: ManageProfile,},
+      { path: "allTour", Component: AllAssignedTours,},
     ],
   },
 ]);
