@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../hook/useAuth";
 import axios from "axios";
 
-
 const SignUp = () => {
   const {
     register,
@@ -19,7 +18,7 @@ const SignUp = () => {
   const [profilePic, setProfilePic] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  // Use plain axios for imgBB upload to avoid credentials issues
+  // 🔼 Handle image upload to imgbb
   const handleImageUpload = async (e) => {
     setUploading(true);
     const file = e.target.files[0];
@@ -39,18 +38,19 @@ const SignUp = () => {
     }
   };
 
+  // 🔐 Handle manual email/password signup
   const onSubmit = async (data) => {
     try {
       const res = await createUser(data.email, data.password);
-      console.log(res)
+      console.log("Auth created:", res);
 
+      // ✅ Set role = 'user' by default
       const userInfo = {
         userEmail: data.email,
         role: "user",
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),
       };
-      console.log(data.name)
 
       await axios.post("http://localhost:3000/users", userInfo);
 
@@ -60,14 +60,13 @@ const SignUp = () => {
       };
 
       await updateUserProfile(profileInfo);
-    
-
       navigate(location.state?.from || "/");
     } catch (err) {
       console.error("Signup error:", err.message);
     }
   };
 
+  // 🔐 Google sign-in with fallback user creation
   const handleGoogleSignIn = async () => {
     try {
       const res = await googleLogin();
@@ -91,7 +90,7 @@ const SignUp = () => {
         <h1 className="text-4xl font-bold text-center mb-2">Create an Account</h1>
         <p className="text-center text-gray-500 mb-6">Register with ROAVIA</p>
 
-        {/* Preview above the form */}
+        {/* Profile image preview */}
         <div className="h-20 w-20 rounded-full border overflow-hidden mb-6 mx-auto">
           {uploading ? (
             <div className="flex items-center justify-center h-full text-sm text-gray-500">
@@ -110,6 +109,7 @@ const SignUp = () => {
           )}
         </div>
 
+        {/* Main SignUp Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="label text-black font-bold">Name</label>
@@ -119,9 +119,7 @@ const SignUp = () => {
               className="input input-bordered w-full"
               placeholder="Name"
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm">Name is required</p>
-            )}
+            {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
           </div>
 
           <div>
@@ -132,9 +130,7 @@ const SignUp = () => {
               className="input input-bordered w-full"
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm">Email is required</p>
-            )}
+            {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
           </div>
 
           <div>
@@ -145,15 +141,11 @@ const SignUp = () => {
               className="input input-bordered w-full"
               placeholder="Password"
             />
-            {errors.password?.type === "required" && (
-              <p className="text-red-500 text-sm">Password is required</p>
-            )}
-            {errors.password?.type === "minLength" && (
-              <p className="text-red-500 text-sm">Minimum 6 characters</p>
-            )}
+            {errors.password?.type === "required" && <p className="text-red-500 text-sm">Password is required</p>}
+            {errors.password?.type === "minLength" && <p className="text-red-500 text-sm">Minimum 6 characters</p>}
           </div>
 
-          {/* Profile Image Upload */}
+          {/* Profile image uploader */}
           <div className="flex flex-col gap-2 mb-4">
             <label className="font-semibold text-black">Upload Your Profile Picture</label>
             <input
@@ -182,7 +174,7 @@ const SignUp = () => {
         </button>
 
         <p className="text-gray-600 text-sm mt-4 text-center">
-          Already have an account?{" "}
+          Already have an account? {" "}
           <a href="/login" className="text-[#caeb90] underline">
             Login
           </a>
