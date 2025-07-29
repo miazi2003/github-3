@@ -23,6 +23,8 @@ import StatCards from "../pages/admin state/Statcards";
 import AddPackageForm from "../Component/AddPackages/AddPackages";
 import ManageUsers from "../pages/manage users/ManageUsers";
 import ManageCandidates from "../pages/Manage Candidate/ManageCandidates";
+import Payment from "../pages/Payment/Payment";
+import PaymentHistory from "../pages/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -49,18 +51,110 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-   
-      { path: "guideProfile/:email", element: <ProtectedRoute><TourGuideProfile></TourGuideProfile></ProtectedRoute> },
-      { path: "guideForm", element: <ProtectedRoute><TourGuideForm></TourGuideForm></ProtectedRoute> },
-      { path: "manageStories", element: <ProtectedRoute><ManageStories></ManageStories></ProtectedRoute> },
-      { path: "updateStory/:id", element: <ProtectedRoute><UpdateStory></UpdateStory></ProtectedRoute> },
-      { path: "addStory", element: <ProtectedRoute><AddStory></AddStory></ProtectedRoute> },
-      { path: "manageBookings", element: <ProtectedRoute><MyBookings></MyBookings></ProtectedRoute> },
-      { path: "profile", element: <ProtectedRoute><ManageProfile></ManageProfile></ProtectedRoute>,},
-      { path: "allTour", element: <ProtectedRoute allowedRoles={["admin"]}><AllAssignedTours></AllAssignedTours></ProtectedRoute>},
-      {path : "addPackages" , element : <ProtectedRoute allowedRoles={["admin"]}><AddPackageForm></AddPackageForm></ProtectedRoute>},
-      {path : "manageUsers" , element : <ProtectedRoute allowedRoles={["admin"]}><ManageUsers></ManageUsers></ProtectedRoute>},
-      {path : "manageCandidates" , element : <ProtectedRoute allowedRoles={["admin"]}><ManageCandidates></ManageCandidates></ProtectedRoute>},
+      {
+        path: "guideProfile/:email",
+        element: (
+          <ProtectedRoute>
+            <TourGuideProfile></TourGuideProfile>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "guideForm",
+        element: (
+          <ProtectedRoute>
+            <TourGuideForm></TourGuideForm>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manageStories",
+        element: (
+          <ProtectedRoute>
+            <ManageStories></ManageStories>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "updateStory/:id",
+        element: (
+          <ProtectedRoute>
+            <UpdateStory></UpdateStory>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "addStory",
+        element: (
+          <ProtectedRoute>
+            <AddStory></AddStory>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manageBookings",
+        element: (
+          <ProtectedRoute>
+            <MyBookings></MyBookings>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <ManageProfile></ManageProfile>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "allTour",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AllAssignedTours></AllAssignedTours>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "addPackages",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AddPackageForm></AddPackageForm>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ManageUsers></ManageUsers>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manageCandidates",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ManageCandidates></ManageCandidates>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "payment/:id",
+        element: (
+          <ProtectedRoute allowedRoles={["tourist"]}>
+            <Payment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "history",
+        element: (
+          <ProtectedRoute allowedRoles={["tourist", "admin"]}>
+            <PaymentHistory/>
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
