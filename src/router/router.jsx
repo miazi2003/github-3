@@ -19,6 +19,10 @@ import DashboardLayout from "../Layouts/DashBoardLayout";
 import ProtectedRoute from "./protected/ProtectedRoute";
 import ManageProfile from "../pages/Manage profile/ManageProfile";
 import AllAssignedTours from "../pages/AllAssigned/AllAssignedTours";
+import StatCards from "../pages/admin state/Statcards";
+import AddPackageForm from "../Component/AddPackages/AddPackages";
+import ManageUsers from "../pages/manage users/ManageUsers";
+import ManageCandidates from "../pages/Manage Candidate/ManageCandidates";
 
 export const router = createBrowserRouter([
   {
@@ -45,14 +49,18 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "guideProfile/:email", Component: TourGuideProfile },
-      { path: "guideForm", Component: TourGuideForm },
-      { path: "manageStories", Component: ManageStories },
-      { path: "updateStory/:id", Component: UpdateStory },
-      { path: "addStory", Component: AddStory },
-      { path: "manageBookings", Component: MyBookings },
-      { path: "profile", Component: ManageProfile,},
-      { path: "allTour", Component: AllAssignedTours,},
+   
+      { path: "guideProfile/:email", element: <ProtectedRoute><TourGuideProfile></TourGuideProfile></ProtectedRoute> },
+      { path: "guideForm", element: <ProtectedRoute><TourGuideForm></TourGuideForm></ProtectedRoute> },
+      { path: "manageStories", element: <ProtectedRoute><ManageStories></ManageStories></ProtectedRoute> },
+      { path: "updateStory/:id", element: <ProtectedRoute><UpdateStory></UpdateStory></ProtectedRoute> },
+      { path: "addStory", element: <ProtectedRoute><AddStory></AddStory></ProtectedRoute> },
+      { path: "manageBookings", element: <ProtectedRoute><MyBookings></MyBookings></ProtectedRoute> },
+      { path: "profile", element: <ProtectedRoute><ManageProfile></ManageProfile></ProtectedRoute>,},
+      { path: "allTour", element: <ProtectedRoute allowedRoles={["admin"]}><AllAssignedTours></AllAssignedTours></ProtectedRoute>},
+      {path : "addPackages" , element : <ProtectedRoute allowedRoles={["admin"]}><AddPackageForm></AddPackageForm></ProtectedRoute>},
+      {path : "manageUsers" , element : <ProtectedRoute allowedRoles={["admin"]}><ManageUsers></ManageUsers></ProtectedRoute>},
+      {path : "manageCandidates" , element : <ProtectedRoute allowedRoles={["admin"]}><ManageCandidates></ManageCandidates></ProtectedRoute>},
     ],
   },
 ]);

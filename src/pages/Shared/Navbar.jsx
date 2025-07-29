@@ -109,7 +109,7 @@ const Navbar = () => {
             )}
             {user && (
               <li>
-                <NavLink to="/dashBoard" className={navLinkClass}>
+                <NavLink to="/dashBoard/profile" className={navLinkClass}>
                  Dashboard
                 </NavLink>
               </li>
@@ -155,7 +155,7 @@ const Navbar = () => {
                 </li>
               {
                 user &&   <li>
-                  <NavLink to="/guideForm" className={navLinkClass}>
+                  <NavLink to="/dashBoard/profile" className={navLinkClass}>
                     Dashboard
                   </NavLink>
                 </li>

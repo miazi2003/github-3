@@ -54,6 +54,8 @@ const ManageProfile = () => {
     }
   };
 
+  console.log("userRole manage",userData?.role)
+
   if (isLoading) return <div className="text-white">Loading...</div>;
 
   return (

@@ -46,7 +46,7 @@ const SignUp = () => {
 
       // ✅ Set role = 'user' by default
       const userInfo = {
-        userEmail: data.email,
+        email: data.email,
         role: "user",
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),

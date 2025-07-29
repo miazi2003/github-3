@@ -1,18 +1,20 @@
-// components/TouristDashboardLayout.jsx
 import { NavLink, Outlet } from "react-router";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import useAuth from "../hook/useAuth";
-
+import BrandLogo from "../pages/Shared/BrandLogo";
 
 const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
-  const { user, loading } = useAuth() 
+  const { user, loading } = useAuth();
   const [links, setLinks] = useState([]);
 
+  // ✅ Safe role-based link setup
   useEffect(() => {
     if (!loading && user?.role) {
-      const role = "admin";
+      const role = user.role;
+      console.log("User object:", user);
+      console.log("User role:", role);
 
       if (role === "admin") {
         setLinks([
@@ -20,6 +22,9 @@ const DashboardLayout = () => {
           { name: "Assigned Tours", path: "/dashboard/allTour" },
           { name: "Add Stories", path: "/dashboard/addStory" },
           { name: "Manage Stories", path: "/dashboard/manageStories" },
+          { name: "Add Package", path: "/dashboard/addPackages" },
+          { name: "Admin Management", path: "/dashboard/manageUsers" },
+          { name: "Guide Management", path: "/dashboard/manageCandidates" },
         ]);
       } else if (role === "guide") {
         setLinks([
@@ -35,11 +40,14 @@ const DashboardLayout = () => {
           { name: "My Bookings", path: "/dashboard/bookings" },
           { name: "Add Stories", path: "/dashboard/addStory" },
           { name: "Manage Stories", path: "/dashboard/manageStories" },
-          { name: "Join as Tour Guide", path: "/dashboard/join-guide" },
+          { name: "Join as Tour Guide", path: "/dashboard/guideForm" },
         ]);
       }
     }
-  }, [user, loading]);
+  }, [loading, user]);
+
+
+  console.log("dashboard",user?.role)
 
   return (
     <div className="flex min-h-screen bg-gray-50 text-gray-800">
@@ -50,11 +58,7 @@ const DashboardLayout = () => {
         } md:translate-x-0`}
       >
         <div className="p-6 text-2xl font-bold text-indigo-600 border-b border-gray-100">
-          {user?.role === "admin"
-            ? "Admin Panel"
-            : user?.role === "guide"
-            ? "Guide Panel"
-            : "Tourist Panel"}
+          <BrandLogo />
         </div>
 
         <nav className="p-4 flex flex-col gap-2">
@@ -76,7 +80,7 @@ const DashboardLayout = () => {
         </nav>
 
         <footer className="mt-auto p-4 text-sm text-center text-gray-400 border-t border-gray-100">
-          © 2025 TourApp
+          © 2025 ROAVIA TourApp
         </footer>
       </div>
 

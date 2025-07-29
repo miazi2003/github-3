@@ -35,8 +35,6 @@ const TourGuideForm = () => {
     e.preventDefault();
 
     const {
-      name,
-      email,
       age,
       experience_years,
       photo,
@@ -45,9 +43,9 @@ const TourGuideForm = () => {
       cost,
     } = formData;
 
+
     if (
-      !name ||
-      !email ||
+
       !age ||
       !experience_years ||
       !photo ||
@@ -61,6 +59,8 @@ const TourGuideForm = () => {
 
     const applicationData = {
       ...formData,
+      name : user?.displayName,
+      email : user?.email,
       age: parseInt(age),
       experience_years: parseInt(experience_years),
       cost: parseFloat(cost),
@@ -71,7 +71,8 @@ const TourGuideForm = () => {
 
     try {
       const res = await axiosSecure.post("/apply-guide", applicationData);
-      if (res.data.success) {
+      console.log(res.data)
+      if (res.data.insertedId) {
         toast.success("Application submitted!");
         setModalIsOpen(true);
       } else {
@@ -94,7 +95,7 @@ const TourGuideForm = () => {
             type="text"
             name="name"
             placeholder="Your Name"
-            value={formData.name}
+            value={user?.displayName}
             onChange={handleChange}
             className="w-full p-3 rounded-md border border-green-400 bg-[#4d6b57] text-white placeholder:text-gray-300"
           />
@@ -102,7 +103,7 @@ const TourGuideForm = () => {
             type="email"
             name="email"
             placeholder="Your Email"
-            value={formData.email}
+            value={user?.email}
             onChange={handleChange}
             className="w-full p-3 rounded-md border border-green-400 bg-[#4d6b57] text-white placeholder:text-gray-300"
           />

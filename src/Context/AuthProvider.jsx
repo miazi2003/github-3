@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase/firebase.init';
 import useAxiosSecure from '../hook/useAxiosSecure';
+import axios from 'axios';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -45,6 +46,7 @@ const AuthProvider = ({ children }) => {
   // 🚪 Sign out
   const signOutUser = () => {
     setLoading(true);
+    localStorage.removeItem("roavia-access-token"); // ✅ Clear token
     return signOut(auth);
   };
 
@@ -55,23 +57,26 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser?.email) {
         try {
-          // 1️⃣ Fetch JWT
-          const jwtRes = await axiosSecure.post('/jwt', { email: currentUser.email });
-          if (jwtRes.data?.token) {
-            localStorage.setItem('access-token', jwtRes.data.token);
-          }
+          // ✅ Step 1: Get JWT token from backend
+          const jwtRes = await axios.post("http://localhost:3000/jwt", {
+            email: currentUser.email,
+          });
+          const token = jwtRes.data.token;
 
-          // 2️⃣ Fetch user from DB (including role)
+          // ✅ Step 2: Save token to localStorage
+          localStorage.setItem("roavia-access-token", token);
+
+          // ✅ Step 3: Fetch user data from DB
           const userRes = await axiosSecure.get(`/users/${currentUser.email}`);
           const userFromDB = userRes.data;
 
-          // 3️⃣ Set user state with role
+          // ✅ Step 4: Set user in state
           setUser({
             email: currentUser.email,
             uid: currentUser.uid,
             displayName: currentUser.displayName,
             photoURL: currentUser.photoURL,
-            role: userFromDB?.role || "tourist", // fallback to 'tourist'
+            role: userFromDB?.role || "tourist",
           });
         } catch (error) {
           console.error("🔥 Auth error:", error.message);
@@ -82,12 +87,12 @@ const AuthProvider = ({ children }) => {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
             photoURL: currentUser.photoURL,
-            role: "tourist", // fallback
+            role: "tourist",
           });
         }
       } else {
         setUser(null);
-        localStorage.removeItem("access-token");
+        localStorage.removeItem("roavia-access-token"); // if user logs out or is null
       }
 
       setLoading(false);
@@ -107,7 +112,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
 
 export default AuthProvider;
