@@ -59,6 +59,7 @@ const PackageDetails = () => {
       tourDate: startDate,
       guideName: selectedGuide,
       status: "pending",
+      paymentStatus : "pending"
     };
 
     console.log("bookingPage" , tour._id)

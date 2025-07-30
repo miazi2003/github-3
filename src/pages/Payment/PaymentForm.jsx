@@ -17,19 +17,19 @@ const PaymentForm = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
-  const { data: bookingInfo = {} } = useQuery({
+  const { data: bookingInfo } = useQuery({
     queryKey: ["bookings", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/bookings?email=${id}`);
+      const res = await axiosSecure.get(`/bookings/${id}`);
       return res.data;
     },
   });
 
   console.log("bookingInfo", bookingInfo);
 
-  const amount = bookingInfo.price;
+  const amount = parseInt(bookingInfo[0].price);
   const amountInCents = amount * 100;
-  console.log(amountInCents);
+console.log(amount)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
