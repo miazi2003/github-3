@@ -44,7 +44,7 @@ const ManageStories = () => {
   };
 
   if (loading) {
-    return <p className="text-white">Loading stories...</p>;
+    return <p className="text-white bg-[#4d6b57] flex justify-center items-center min-h-screen">Loading stories...</p>;
   }
 
   return (

@@ -37,7 +37,7 @@ const DashboardLayout = () => {
         // tourist
         setLinks([
           { name: "Manage Profile", path: "/dashboard/profile" },
-          { name: "My Bookings", path: "/dashboard/bookings" },
+          { name: "My Bookings", path: "/dashboard/manageBookings" },
           { name: "Add Stories", path: "/dashboard/addStory" },
           { name: "Manage Stories", path: "/dashboard/manageStories" },
           { name: "Join as Tour Guide", path: "/dashboard/guideForm" },

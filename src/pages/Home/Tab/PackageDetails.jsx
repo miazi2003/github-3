@@ -50,6 +50,7 @@ const PackageDetails = () => {
     }
 
     const bookingData = {
+      tourId : tour._id ,
       packageName: tour.title,
       touristName: user.displayName,
       touristEmail: user.email,
@@ -60,9 +61,12 @@ const PackageDetails = () => {
       status: "pending",
     };
 
+    console.log("bookingPage" , tour._id)
+
     try {
-      await axiosSecure.post("/bookings", bookingData);
+      const res = await axiosSecure.post("/bookings", bookingData);
       setModalIsOpen(true);
+      console.log(res.data)
     } catch (err) {
       toast.error("Booking failed. Please try again.");
       console.error(err);
@@ -90,6 +94,8 @@ const PackageDetails = () => {
       <div className="text-white bg-[#3b4e42] p-6 rounded-md shadow">
         <h2 className="text-2xl font-bold mb-2">About the Tour</h2>
         <p>{tour.description}</p>
+        <br />
+        <img src={tour.photo} alt="" className="lg:h-122 lg:w-screen" />
       </div>
 
       {/* Tour Plan */}
@@ -103,29 +109,7 @@ const PackageDetails = () => {
         ))}
       </div>
 
-      {/* Tour Guides */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4 text-green-900">Tour Guides</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {guides.map((guide) => (
-            <div
-              key={guide._id}
-              onClick={() => navigate(`/guide/${guide._id}`)}
-              className="cursor-pointer bg-[#4d6b57] text-white p-3 rounded-md hover:bg-[#3b4e42] transition"
-            >
-              <img
-                src={guide.photo}
-                alt={guide.name}
-                className="h-32 w-full object-cover rounded"
-              />
-              <h4 className="mt-2 font-semibold">{guide.name}</h4>
-              <p className="text-sm">Exp: {guide.experience_years} yrs</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Booking Form */}
+            {/* Booking Form */}
     {/* Booking Form */}
 <div className="bg-[#3b4e42] p-6 rounded-md shadow-md max-w-3xl mx-auto">
   <h2 className="text-2xl font-bold mb-6 text-lime-300 text-center">
@@ -246,6 +230,30 @@ const PackageDetails = () => {
           Go to My Bookings
         </button>
       </Modal>
+
+      {/* Tour Guides */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4 text-green-900">Tour Guides</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {guides.map((guide) => (
+            <div
+              key={guide._id}
+              onClick={() => navigate(`/guide/${guide._id}`)}
+              className="cursor-pointer bg-[#4d6b57] text-white p-3 rounded-md hover:bg-[#3b4e42] transition"
+            >
+              <img
+                src={guide.photo}
+                alt={guide.name}
+                className="h-32 w-full object-cover rounded"
+              />
+              <h4 className="mt-2 font-semibold">{guide.name}</h4>
+              <p className="text-sm">Exp: {guide.experience_years} yrs</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
     </div>
   );
 };

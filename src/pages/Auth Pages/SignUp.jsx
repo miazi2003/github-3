@@ -46,8 +46,8 @@ const SignUp = () => {
 
       // ✅ Set role = 'user' by default
       const userInfo = {
-        email: data.email,
-        role: "user",
+        userEmail: data.email,
+        role: "tourist",
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),
       };
@@ -72,7 +72,7 @@ const SignUp = () => {
       const res = await googleLogin();
       const userInfo = {
         userEmail: res.user?.email,
-        role: "user",
+        role: "tourist",
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),
       };

@@ -14,19 +14,20 @@ const PaymentForm = () => {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const { data: parcelInfo = {} } = useQuery({
-    queryKey: ["parcels", id],
+
+  const { data: bookingInfo = {} } = useQuery({
+    queryKey: ["bookings", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`http://localhost:3000/myParcel/${id}`);
+      const res = await axiosSecure.get(`/bookings?email=${id}`);
       return res.data;
     },
   });
 
-  console.log("parcelInfo", parcelInfo);
+  console.log("bookingInfo", bookingInfo);
 
-  const amount = parcelInfo.cost;
+  const amount = bookingInfo.price;
   const amountInCents = amount * 100;
   console.log(amountInCents);
   const handleSubmit = async (e) => {
@@ -53,13 +54,10 @@ const PaymentForm = () => {
 
     //create payment intent
 
-    const res = await axiosSecure.post(
-      "http://localhost:3000/create-payment-intent",
-      {
-        amountInCents,
-        parcelId: id,
-      }
-    );
+    const res = await axiosSecure.post("/create-payment-intent", {
+      amountInCents,
+      bookingId: id,
+    });
 
     const clientSecret = res.data.clientSecret;
     const result = await stripe.confirmCardPayment(clientSecret, {
@@ -89,7 +87,7 @@ const PaymentForm = () => {
 
     if (result.paymentIntent.status === "succeeded") {
       const updateRes = await axiosSecure.put(
-        `http://localhost:3000/updatePayment/${id}`,
+        `/updatePayment/${id}`,
         {
           transactionId: transactionId,
           paymentStatus: "Paid",
@@ -98,8 +96,8 @@ const PaymentForm = () => {
       console.log("res", updateRes.data);
 
       axiosSecure
-        .post("http://localhost:3000/tracking", {
-          trackingId: parcelInfo.trackingId,
+        .post("/tracking", {
+          trackingId: bookingInfo.trackingId,
           updates: [
             {
               status: "paid",
@@ -122,8 +120,8 @@ const PaymentForm = () => {
         icon: "success",
       });
 
-      const parcelData = {
-        parcelId: id,
+      const bookingData = {
+        bookingId: id,
         transactionId,
         amount,
         paidBy: user?.displayName,
@@ -133,12 +131,12 @@ const PaymentForm = () => {
       };
 
       const savRes = await axiosSecure.post(
-        "http://localhost:3000/savePayments",
-        parcelData
+        "/savePayments",
+        bookingData
       );
       console.log("payment saved", savRes.data);
 
-      navigate("/dashBoard/myParcels");
+      navigate("/dashBoard");
     } else {
       Swal.fire({
         icon: "error",

@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
+import { Link, useNavigate } from "react-router";
 
 const MyBookings = () => {
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const email = user?.email;
+  const navigate = useNavigate()
 
   const { data: bookings = [], isLoading, isError } = useQuery({
     queryKey: ["bookings", email],
@@ -33,23 +35,19 @@ console.log(bookings.length)
     },
   });
 
-  const handlePay = async () => {
-    // Placeholder for Stripe integration
-  };
-
   const handleCancel = (bookingId) => {
     cancelMutation.mutate(bookingId);
   };
 
   if (isLoading)
-    return <div className="text-white text-center mt-10">Loading...</div>;
+    return <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">Loading...</div>;
   if (isError)
     return (
-      <div className="text-red-500 text-center mt-10">Error loading bookings.</div>
+     <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">Error Loading Bookings</div>
     );
 
      if(bookings.length === 0){
-       return <div className="text-white text-center mt-10 min-h-screen">No Bookings Found...</div>;
+       return <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">No Bookings Found...</div>;
      }
 
   return (
@@ -107,12 +105,12 @@ console.log(bookings.length)
                 <td className="p-4 flex gap-2 justify-center">
                   {booking.status === "pending" && (
                     <>
+                     <Link to={`/dashBoard/payment/${booking._id}`}>
                       <button
-                        onClick={() => handlePay(booking._id)}
                         className="bg-lime-500 hover:bg-lime-400 text-black font-semibold px-4 py-2 rounded-lg shadow-md shadow-lime-300/40 transition-all"
                       >
                         Pay
-                      </button>
+                      </button></Link>
                       <button
                         onClick={()=>{handleCancel(booking._id)}}
                         className="bg-red-500 hover:bg-red-400 text-white font-semibold px-4 py-2 rounded-lg shadow-md shadow-red-300/40 transition-all"
