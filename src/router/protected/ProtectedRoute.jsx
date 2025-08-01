@@ -12,14 +12,13 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  if (loading || user === null || user?.role === undefined) {
+  if (loading) {
     return <div className="text-center py-10 text-lg font-semibold">Loading...</div>;
   }
 
-  if (!user) {
-    return <Navigate to="/signIn" state={{ from: location }} replace />;
-  }
-
+  if(!user){
+    return <Navigate to="/signIn"  state={{ pathname: location.pathname }}/>
+}
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     return <Navigate to="/" replace />;

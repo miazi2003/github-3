@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         try {
           // ✅ Step 1: Get JWT token from backend
-          const jwtRes = await axios.post("http://localhost:3000/jwt", {
+          const jwtRes = await axiosSecure.post("/jwt", {
             email: currentUser.email,
           });
           const token = jwtRes.data.token;

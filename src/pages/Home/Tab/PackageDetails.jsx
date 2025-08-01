@@ -18,6 +18,8 @@ const PackageDetails = () => {
   const [selectedGuide, setSelectedGuide] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  
+
   // ✅ Fetch tour data by ID
   const { data: tour = null, isLoading: loadingTour } = useQuery({
     queryKey: ["tourData", id],
@@ -74,8 +76,8 @@ const PackageDetails = () => {
     }
   };
 
-  if (loadingTour || loadingGuides) return <p>Loading...</p>;
-  if (!tour) return <p>Tour not found.</p>;
+  if (loadingTour || loadingGuides) return <p className="min-h-screen">Loading...</p>;
+  if (!tour) return <p className="min-h-screen">Tour not found.</p>;
 
   return (
     <div className="space-y-10 px-6 py-8">

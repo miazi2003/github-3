@@ -1,11 +1,11 @@
 import React from 'react';
-
+import logo from "../../assets/logo.png"
 const Footer = () => {
   return (
     <div className="w-full overflow-x-hidden">
-      <footer className="footer sm:footer-horizontal bg-navy-500 text-gray-600 p-10 w-full shadow-sm">
+      <footer className="footer sm:footer-horizontal bg-navy-500 text-white p-10 w-full shadow-sm">
         <aside>
-          <img src="/logo.png" alt="ROAVIA Logo" className="w-12 h-12 mb-2" />
+          <img src={logo} alt="ROAVIA Logo" className="w-24 h-24" />
           <p className="text-lg font-bold">ROAVIA</p>
           <p className="text-sm text-gray-300">Exploring Beyond Limits</p>
           <p className="text-xs text-gray-400">© 2025 ROAVIA. All rights reserved.</p>

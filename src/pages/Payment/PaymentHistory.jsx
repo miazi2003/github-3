@@ -22,7 +22,7 @@ const PaymentHistory = () => {
     queryFn: async () => {
       try {
         const res = await axiosSecure.get(
-          `http://localhost:3000/savedPayments?email=${userEmail}`
+          `/savedPayments?email=${userEmail}`
         );
         console.log("Fetched parcel data:", res.data); // ✅ Debugging aid
         return res.data;

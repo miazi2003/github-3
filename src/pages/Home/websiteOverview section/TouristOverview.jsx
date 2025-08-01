@@ -1,43 +1,50 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaMapMarkedAlt, FaRegCompass, FaGlobeAsia, FaStar, FaUsers, FaUtensils, FaMountain, FaLightbulb } from "react-icons/fa";
+import {
+  FaMapMarkedAlt,
+  FaRegCompass,
+  FaGlobeAsia,
+  FaStar,
+  FaUtensils,
+  FaLightbulb,
+} from "react-icons/fa";
 
 const features = [
   {
-    icon: <FaMapMarkedAlt size={28} className="text-primary" />,
+    icon: <FaMapMarkedAlt size={28} className="text-[#4d6b57]" />,
     title: "Destination Insights",
-    desc: "Explore comprehensive information about famous destinations and hidden gems throughout Bangladesh."
+    desc: "Explore information about famous destinations and hidden gems across Bangladesh."
   },
   {
-    icon: <FaRegCompass size={28} className="text-primary" />,
+    icon: <FaRegCompass size={28} className="text-[#4d6b57]" />,
     title: "Authentic Experiences",
-    desc: "Immerse yourself in the rich cultural heritage, local festivals, and traditional lifestyles."
+    desc: "Immerse in rich culture, local festivals, and traditional lifestyles."
   },
   {
-    icon: <FaUtensils size={28} className="text-primary" />,
+    icon: <FaUtensils size={28} className="text-[#4d6b57]" />,
     title: "Food & Cuisine",
-    desc: "Discover regional flavors, must-try dishes, and where to find the best local eateries."
+    desc: "Discover regional flavors and where to find the best local eats."
   },
   {
-    icon: <FaStar size={28} className="text-primary" />,
+    icon: <FaStar size={28} className="text-[#4d6b57]" />,
     title: "Hidden Gems",
-    desc: "Uncover off-the-beaten-path locations and lesser-known natural wonders."
+    desc: "Uncover off-the-beaten-path natural wonders and quiet retreats."
   },
   {
-    icon: <FaGlobeAsia size={28} className="text-primary" />,
+    icon: <FaGlobeAsia size={28} className="text-[#4d6b57]" />,
     title: "Smart Travel Planning",
-    desc: "Use our data-driven insights to plan personalized, efficient, and enjoyable trips."
+    desc: "Use our insights to plan personalized and efficient trips."
   },
   {
-    icon: <FaLightbulb size={28} className="text-primary" />,
+    icon: <FaLightbulb size={28} className="text-[#4d6b57]" />,
     title: "Traveler Tips",
-    desc: "Practical advice for every kind of traveler – from safety to budgeting and local etiquette."
+    desc: "Practical advice on safety, budgeting, and local etiquette."
   },
 ];
 
 const TouristOverview = () => {
   return (
-    <section className="bg-white py-16 px-4 sm:px-10 md:px-20 lg:px-32 space-y-24">
+    <section className="bg-[#eafff8] py-16 px-4 sm:px-10 md:px-20 lg:px-32 space-y-24">
       {/* Section 1: Intro */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -47,10 +54,10 @@ const TouristOverview = () => {
         className="text-center max-w-4xl mx-auto"
       >
         <h2 className="text-4xl font-bold text-gray-800 mb-4">
-          Welcome to <span className="text-primary">The Tourist Guide</span>
+          Welcome to <span className="text-[#4d6b57]">The Tourist Guide</span>
         </h2>
         <p className="text-gray-600 text-lg">
-          Your trusted travel partner for discovering the beauty, culture, and history of Bangladesh. Our platform provides the tools and knowledge you need to explore confidently — from city streets to rural villages, iconic landmarks to untouched natural wonders.
+          Discover the beauty, culture, and history of Bangladesh with confidence — from iconic landmarks to rural charms.
         </p>
       </motion.div>
 
@@ -59,15 +66,13 @@ const TouristOverview = () => {
         className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
         initial="hidden"
         whileInView="visible"
-        variants={{
-          visible: { transition: { staggerChildren: 0.2 } },
-        }}
+        variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
         viewport={{ once: true }}
       >
         {features.map((feature, index) => (
           <motion.div
             key={index}
-            className="p-6 rounded-xl bg-gray-50 shadow hover:shadow-lg transition"
+            className="p-6 rounded-xl bg-white border border-green-400 shadow hover:shadow-md transition"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -99,13 +104,13 @@ const TouristOverview = () => {
             Built for Every Kind of Explorer
           </h3>
           <ul className="text-gray-700 space-y-3 list-disc list-inside">
-            <li><strong>Local travelers</strong> seeking new adventures within Bangladesh</li>
-            <li><strong>International tourists</strong> discovering this vibrant country for the first time</li>
-            <li><strong>Backpackers & solo travelers</strong> looking for reliable insights</li>
-            <li><strong>Travel agencies & bloggers</strong> needing structured travel data</li>
+            <li><strong>Local travelers</strong> seeking new adventures</li>
+            <li><strong>International tourists</strong> visiting Bangladesh</li>
+            <li><strong>Backpackers</strong> wanting reliable insights</li>
+            <li><strong>Travel agencies & bloggers</strong> needing curated data</li>
           </ul>
           <p className="mt-4 text-gray-600">
-            Whether you're chasing waterfalls, savoring traditional biryani, or planning a group tour — The Tourist Guide helps you do it better.
+            Whether chasing waterfalls or savoring biryani — we help you do it better.
           </p>
         </div>
       </motion.div>
@@ -122,13 +127,13 @@ const TouristOverview = () => {
           Experience Culture, Not Just Places
         </h3>
         <p className="text-gray-600 text-lg">
-          From the hospitality of rural villages to the energy of Dhaka’s streets, Bangladesh offers more than scenic views — it offers stories, flavors, and unforgettable human connection. We highlight cultural hotspots, culinary trails, and meaningful traditions to enrich your experience.
+          From the warmth of rural homes to the buzz of Dhaka — Bangladesh offers unforgettable stories and human connection.
         </p>
       </motion.div>
 
-      {/* Section 5: What's Next */}
+      {/* Section 5: What's Coming Next */}
       <motion.div
-        className="bg-gray-50 p-10 rounded-xl shadow"
+        className="bg-white border border-green-400 p-10 rounded-xl shadow"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -137,12 +142,12 @@ const TouristOverview = () => {
         <h3 className="text-2xl font-bold mb-4 text-gray-800 text-center">
           What’s Coming Next?
         </h3>
-        <ul className="grid md:grid-cols-2 gap-6 text-gray-700">
+        <ul className="grid md:grid-cols-2 gap-6 text-gray-700 list-disc list-inside">
           <li>🗺️ Interactive destination map</li>
           <li>📋 Personalized itinerary builder</li>
           <li>🌐 Multilingual content</li>
           <li>⭐ User reviews and ratings</li>
-          <li>📹 Virtual tours and drone footage</li>
+          <li>📹 Virtual tours and drone views</li>
           <li>🤖 AI-based travel suggestions</li>
         </ul>
       </motion.div>
@@ -159,9 +164,12 @@ const TouristOverview = () => {
           Ready to Explore?
         </h3>
         <p className="text-lg text-gray-600 mb-6">
-          Join thousands of travelers using The Tourist Guide to make their journey in Bangladesh unforgettable.
+          Join thousands using The Tourist Guide to plan their unforgettable trip.
         </p>
-        <a href="/explore" className="bg-primary text-white px-6 py-3 rounded-xl shadow hover:bg-opacity-90 transition duration-200">
+        <a
+          href="/explore"
+          className="bg-[#4d6b57] text-white px-6 py-3 rounded-xl shadow hover:bg-opacity-90 transition duration-200"
+        >
           Start Exploring Now
         </a>
       </motion.div>

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const MyBookings = () => {
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const email = user?.email;
-  const navigate = useNavigate()
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const { data: bookings = [], isLoading, isError } = useQuery({
     queryKey: ["bookings", email],
@@ -20,9 +22,8 @@ const MyBookings = () => {
     },
     enabled: !!email,
   });
-console.log(bookings.length)
+
   const cancelBooking = async (bookingId) => {
-    console.log(bookingId)
     const res = await axiosSecure.delete(`/cancel-booking/${bookingId}`);
     if (!res.data.success) throw new Error("Failed to cancel booking");
     return bookingId;
@@ -40,15 +41,31 @@ console.log(bookings.length)
   };
 
   if (isLoading)
-    return <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">Loading...</div>;
+    return (
+      <div className="text-white text-center min-h-screen bg-[#4d6b57] flex justify-center items-center">
+        Loading...
+      </div>
+    );
   if (isError)
     return (
-     <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">Error Loading Bookings</div>
+      <div className="text-white text-center min-h-screen bg-[#4d6b57] flex justify-center items-center">
+        Error Loading Bookings
+      </div>
     );
 
-     if(bookings.length === 0){
-       return <div className="text-white text-center  min-h-screen bg-[#4d6b57] flex justify-center items-center">No Bookings Found...</div>;
-     }
+  if (bookings.length === 0) {
+    return (
+      <div className="text-white text-center min-h-screen bg-[#4d6b57] flex justify-center items-center">
+        No Bookings Found...
+      </div>
+    );
+  }
+
+  // Pagination logic
+  const totalPages = Math.ceil(bookings.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentBookings = bookings.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="min-h-screen bg-[#4d6b57] p-8 text-white">
@@ -73,7 +90,7 @@ console.log(bookings.length)
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking) => (
+            {currentBookings.map((booking) => (
               <motion.tr
                 key={booking._id}
                 initial={{ opacity: 0, y: 10 }}
@@ -105,14 +122,15 @@ console.log(bookings.length)
                 <td className="p-4 flex gap-2 justify-center">
                   {booking.status === "pending" && (
                     <>
-                     <Link to={`/dashBoard/payment/${booking._id}`}>
+                      <Link to={`/dashBoard/payment/${booking._id}`}>
+                        <button className="bg-lime-500 hover:bg-lime-400 text-black font-semibold px-4 py-2 rounded-lg shadow-md shadow-lime-300/40 transition-all">
+                          Pay
+                        </button>
+                      </Link>
                       <button
-                        className="bg-lime-500 hover:bg-lime-400 text-black font-semibold px-4 py-2 rounded-lg shadow-md shadow-lime-300/40 transition-all"
-                      >
-                        Pay
-                      </button></Link>
-                      <button
-                        onClick={()=>{handleCancel(booking._id)}}
+                        onClick={() => {
+                          handleCancel(booking._id);
+                        }}
                         className="bg-red-500 hover:bg-red-400 text-white font-semibold px-4 py-2 rounded-lg shadow-md shadow-red-300/40 transition-all"
                       >
                         Cancel
@@ -124,6 +142,23 @@ console.log(bookings.length)
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="mt-6 flex justify-center gap-2">
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => setCurrentPage(num + 1)}
+            className={`px-4 py-2 rounded-lg font-medium ${
+              currentPage === num + 1
+                ? "bg-lime-400 text-black"
+                : "bg-[#2f4c3b] text-white border border-green-400"
+            } hover:bg-lime-300 hover:text-black transition-all`}
+          >
+            {num + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

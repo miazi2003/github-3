@@ -23,7 +23,7 @@ const ManageCandidates = () => {
   const handleAccept = async (email) => {
     try {
       const res = await axiosSecure.put(`/users/role/${email}`, { role: "guide" });
-
+      console.log(res.data)
       if (res.data.modifiedCount > 0) {
         toast.success("Guide approved and user role updated");
         refetch();
@@ -78,7 +78,7 @@ const ManageCandidates = () => {
                 <tr key={candidate._id} className="border-t border-lime-300">
                   <td className="p-3">{idx + 1}</td>
                   <td className="p-3">{candidate.name || "N/A"}</td>
-                  <td className="p-3">{candidate.userEmail}</td>
+                  <td className="p-3">{candidate.email}</td>
                   <td className="p-3">{candidate.phone || "N/A"}</td>
                   <td className="p-3">{candidate.experience || "N/A"}</td>
                   <td className="p-3 space-x-2">

@@ -26,6 +26,7 @@ import ManageCandidates from "../pages/Manage Candidate/ManageCandidates";
 import Payment from "../pages/Payment/Payment";
 import PaymentHistory from "../pages/Payment/PaymentHistory";
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,11 +37,21 @@ export const router = createBrowserRouter([
       { path: "/signIn", Component: SignIn },
       { path: "/about", Component: About },
       { path: "/overview", Component: TouristOverview },
-      { path: "/package/:id", Component: PackageDetails },
+      {
+        path: "/package/:id",
+        element: (
+          <ProtectedRoute>
+            <PackageDetails></PackageDetails>
+          </ProtectedRoute>
+        ),
+      },
       { path: "/allPackages", Component: AllPackages },
-
       { path: "/community", Component: StoryCommunity },
       { path: "/viewStory/:id", Component: ViewStory },
+      {
+        path: "/guideProfile/:email",
+        element: <TourGuideProfile />,
+      },
     ],
   },
   {
@@ -151,7 +162,7 @@ export const router = createBrowserRouter([
         path: "history",
         element: (
           <ProtectedRoute allowedRoles={["tourist", "admin"]}>
-            <PaymentHistory/>
+            <PaymentHistory />
           </ProtectedRoute>
         ),
       },

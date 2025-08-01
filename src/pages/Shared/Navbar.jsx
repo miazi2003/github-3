@@ -1,5 +1,6 @@
 import { NavLink } from "react-router"; // use "react-router-dom" not "react-router"
 import useAuth from "../../hook/useAuth";
+import logo from "../../assets/logo.png"
 
 // Active link styling
 const navLinkClass = ({ isActive }) =>
@@ -11,7 +12,7 @@ const Navbar = () => {
   const { user, signOutUser } = useAuth();
 
   return (
-    <div className="bg-base-200 shadow-sm">
+    <div className=" shadow-sm bg-[#2debab] ">
       <div className="navbar max-w-7xl mx-auto">
         {/* Navbar Start */}
         <div className="navbar-start">
@@ -80,7 +81,7 @@ const Navbar = () => {
             to="/"
             className="btn btn-ghost text-xl flex items-center gap-2"
           >
-            <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+            <img src={logo} alt="Logo" className="w-18 h-18" />
             ROAVIA
           </NavLink>
         </div>
@@ -123,7 +124,7 @@ const Navbar = () => {
         </div>
 
         {/* Navbar End */}
-        <div className="navbar-end space-x-2">
+        <div className="navbar-end space-x-2 ">
           {!user ? (
             <>
               <NavLink to="/signIn" >
