@@ -23,7 +23,7 @@ const AllAssignedTours = () => {
       toast.error("❌ Failed to load assigned tours");
     },
     onSuccess: () => {
-      toast.success("✅ Assigned tours loaded");
+      toast.success("✅ Assigned tours loaded now");
     },
   });
 
