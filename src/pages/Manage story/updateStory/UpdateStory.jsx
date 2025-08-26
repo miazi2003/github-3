@@ -21,7 +21,7 @@ const UpdateStory = () => {
         const res = await axiosSecure.get(`/stories/${id}`);
         setStoryData(res.data);
       } catch (err) { 
-        toast.error("Failed to fetch story" , err);
+        toast.error("Failed to fetch stories" , err);
       }
     };
     fetchStory();
