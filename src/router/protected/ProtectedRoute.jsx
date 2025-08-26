@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const location = useLocation();
 
   if (loading) {
-    return <div className="text-center py-10 text-lg font-semibold">Loading...</div>;
+    return <div className="text-center py-10 text-lg font-semibold">Loading......</div>;
   }
 
   if(!user){
