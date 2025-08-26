@@ -32,8 +32,8 @@ const AddStory = () => {
       setTitle("");
       setStoryText("");
       setImageList([]);
-    } catch (err) {
-      console.error("Failed to save story", err);
+    } catch (error) {
+      console.error("Failed to save story", error);
       toast.error("Failed to submit story. Please try again.");
     }
   };
