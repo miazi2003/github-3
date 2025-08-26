@@ -32,7 +32,7 @@ const MyBookings = () => {
   const cancelMutation = useMutation({
     mutationFn: cancelBooking,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["bookings", email] });
+      queryClient.invalidateQueries({ queryKey: ["bookingss", email] });
     },
   });
 
