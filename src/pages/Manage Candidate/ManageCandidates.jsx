@@ -32,7 +32,7 @@ const ManageCandidates = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong now");
     }
   };
 
