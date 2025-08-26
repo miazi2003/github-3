@@ -80,7 +80,7 @@ const DashboardLayout = () => {
         </nav>
 
         <footer className="mt-auto p-4 text-sm text-center text-gray-400 border-t border-gray-100">
-          © 2025 ROAVIA TourApp
+          ©2025 ROAVIA TourApp
         </footer>
       </div>
 
